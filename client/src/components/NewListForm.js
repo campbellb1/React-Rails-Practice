@@ -12,7 +12,7 @@ const NewListForm = ({onNewList = f => f}) => {
 
     return (
         <form onSubmit={submit}>
-            <input  ref={input => title = input} 
+            <input  ref={input => title = input}
                     type="text"
                     placeholder="Title..." required />
             <input  ref={input => excerpt = input}
@@ -21,7 +21,6 @@ const NewListForm = ({onNewList = f => f}) => {
             <button>Add List</button>
         </form>
     )
-
 }
 
 export default NewListForm;

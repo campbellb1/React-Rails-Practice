@@ -7,11 +7,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">こんにちは</h1>
-      </header>
-      <ListsContainer />
-    </div>
+        <header className="App-header">
+          <h1 className="App-title">Hello there Stranger! Leave a comment below!</h1>
+        </header>
+        <ListsContainer />
+      </div>
     );
   }
 }
