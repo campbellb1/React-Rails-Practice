@@ -4,5 +4,9 @@ Rails.application.routes.draw do
 			resources :items
   		resources :lists
 		end
-	end  
+	end
+	
+get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+	!request.xhr? && request.fomat.html?
+end  
 end
