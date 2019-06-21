@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_194214) do
+ActiveRecord::Schema.define(version: 2019_06_21_140842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 2019_03_03_194214) do
     t.text "excerpt"
     t.text "description"
     t.integer "upvotes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plants", force: :cascade do |t|
+    t.string "common_name"
+    t.string "scientific_name"
+    t.string "plant_class"
+    t.string "order"
+    t.string "family"
+    t.string "genus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
