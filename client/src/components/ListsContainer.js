@@ -77,7 +77,7 @@ class ListsContainer extends Component {
 		if (process.env.NODE_ENV !== 'production') {
   			return 'http://localhost:3001/api/v1/lists.json'
 		}
-		return 'https://mysterious-tundra-13244.herokuapp.com/api/v1/lists.json'
+		return 'https://salty-journey-79507.herokuapp.com/api/v1/lists.json'
 	}
 
 	render() {
