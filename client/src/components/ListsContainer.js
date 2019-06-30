@@ -9,6 +9,7 @@ class ListsContainer extends Component {
 		super(props)
 		this.state = {
 			lists: [],
+			plant_list: [],
 			editingListId: null
 		}
 		this.addNewList = this.addNewList.bind(this)
@@ -18,13 +19,14 @@ class ListsContainer extends Component {
 	}
 
 	componentDidMount() {
-		axios.get(this.apiEndPoint())
-		.then(response => { 
-			console.log(response)
+		axios.all([axios.get(apiEndPoint('lists')), axios.get(apiEndPoint('plants'))])
+		.then(axios.spread((lists_list, plants_list) => { 
+			console.log(lists_list & ' ' & plants_list)
 			this.setState({
-				lists: response.data
+				lists: lists_list.data,
+				plants: plants_list.data
 			})
-		})
+		}))
 		.catch(error => console.log(error))
 	}
 
@@ -73,11 +75,11 @@ class ListsContainer extends Component {
 	    .catch(error => console.log(error));
 	}
 
-	apiEndPoint(){
+	apiEndPoint(resource){
 		if (process.env.NODE_ENV !== 'production') {
-  			return 'http://localhost:3001/api/v1/lists.json'
+  			return `http://localhost:3001/api/v1/${resource}.json`
 		}
-		return 'https://salty-journey-79507.herokuapp.com/api/v1/lists.json'
+		return `https://salty-journey-79507.herokuapp.com/api/v1/${resource}.json`
 	}
 
 	render() {
