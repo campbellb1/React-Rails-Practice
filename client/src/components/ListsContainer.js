@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import List from './List';
+import Plant from './Plant';
 import NewListForm from './NewListForm';
 import EditListForm from './EditListForm';
 
@@ -9,7 +10,7 @@ class ListsContainer extends Component {
 		super(props)
 		this.state = {
 			lists: [],
-			plant_list: [],
+			plants: [],
 			editingListId: null
 		}
 		this.addNewList = this.addNewList.bind(this)
@@ -19,9 +20,9 @@ class ListsContainer extends Component {
 	}
 
 	componentDidMount() {
-		axios.all([axios.get("https://salty-journey-79507.herokuapp.com/api/v1/lists.json"), axios.get("https://salty-journey-79507.herokuapp.com/api/v1/lists.json")])
+		axios.all([axios.get("https://salty-journey-79507.herokuapp.com/api/v1/lists.json"), axios.get("https://salty-journey-79507.herokuapp.com/api/v1/plants.json")])
 		.then(axios.spread((lists_list, plants_list) => { 
-			console.log(lists_list.data & ' ' & plants_list.data)
+			console.log(plants_list.data)
 			console.log("^ information above")
 			this.setState({
 				lists: lists_list.data,
@@ -84,7 +85,7 @@ class ListsContainer extends Component {
 	}
 
 	render() {
-        return (
+        return ([
             <div className="Lists-container">
                 {this.state.lists.map( list => {
 	                if ( this.state.editingListId === list.id ) {
@@ -103,9 +104,18 @@ class ListsContainer extends Component {
 	                }
             	})}
                 <NewListForm onNewList={this.addNewList} />
-            </div>
-
-        )
+			</div>,
+			<div className="Lists-container">
+			{this.state.plants.map( plant => {
+					return (<Plant 
+								plant={plant} 
+								key={plant.scientific_name}
+					/>)
+				}
+			)}
+			</div>]
+		)
+		
     }
 }
 
